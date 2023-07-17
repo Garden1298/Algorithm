@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,72 +6,82 @@ import java.util.StringTokenizer;
 
 public class Main {
 	
-	static int N, answer;
+	static int count = 0;
+	static int N;
 	static int map[][];
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = null;
+		
 		N = Integer.parseInt(br.readLine());
-		map = new int[N+1][N+1];
+		map= new int[N+1][N+1];
+		int garo[][] = new int[N+1][N+1]; 
+		int sero[][] = new int[N+1][N+1]; 
+		int deagak[][] = new int[N+1][N+1]; 
 		
 		for(int i = 1; i<=N; i++)
 		{
-			StringTokenizer st = new StringTokenizer(br.readLine());
+			st = new StringTokenizer(br.readLine());
 			for(int j = 1; j<=N; j++)
 			{
-				map[i][j]= Integer.parseInt(st.nextToken());
+				map[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-		dfs(1, 2, 1);
-		System.out.println(answer);
+		
+		garo[1][2] =1;
+		
+		for(int i = 1; i<=N; i++)
+		{
+			for(int j = 1; j<=N; j++)
+			{
+				if((i==1&&j<=2)||map[i][j]==1) continue;
+				
+				garo[i][j] = garo[i][j-1]+deagak[i][j-1];
+				sero[i][j] = sero[i-1][j]+deagak[i-1][j];
+				
+				if(map[i-1][j]==1||map[i][j-1]==1)continue;
+				deagak[i][j] = garo[i-1][j-1]+sero[i-1][j-1]+deagak[i-1][j-1];
+			}
+		}
+		
+		System.out.println(garo[N][N]+sero[N][N]+deagak[N][N]);
+
 	}
 	
-	private static void dfs(int a, int b, int pipe) {
-		
-		if(a == N && b == N)//도착했다면 정답에 1을 더하고 재귀 나가기
+	public static void pipeMove(int x, int y, int dir)
+	{
+		if(x == N && y == N)
 		{
-			answer += 1;
+			count++;
 			return;
 		}
 		
-		switch (pipe) {
-		case 1: //1 : 좌우 파이프
-			if(b+1 <= N && map[a][b+1] != 1)//오른쪽 1칸 이동
-			{
-				dfs(a, b+1, 1);
-			}
-			if(a+1 <= N && b+1 <= N && map[a+1][b] != 1 && map[a][b+1] != 1 && map[a+1][b+1] != 1)//45도 회전
-			{
-				dfs(a+1, b+1, 3);
-			}
-			break;
-		case 2: //2 : 상하 파이프
-			if(a+1 <= N && map[a+1][b] != 1)//아래쪽 1칸 이동
-			{
-				dfs(a+1, b, 2);
-			}
-			if(a+1 <= N && b+1 <= N && map[a+1][b] != 1 && map[a][b+1] != 1 && map[a+1][b+1] != 1)//45도 회전
-			{
-				dfs(a+1, b+1, 3);
-			}
-			break;
-		case 3: //3 : 대각선 파이프
-			if(b+1 <= N && map[a][b+1] != 1)//오른쪽 1칸 이동
-			{
-				dfs(a, b+1, 1);
-			}
-			if(a+1 <= N && map[a+1][b] != 1)//아래쪽 1칸 이동
-			{
-				dfs(a+1, b, 2);
-			}
-			if(a+1 <= N && b+1 <= N && map[a+1][b] != 1 && map[a][b+1] != 1 && map[a+1][b+1] != 1)//45도 회전
-			{
-				dfs(a+1, b+1, 3);
-			}
-			break;
-		default:
-			break;
+		if(x>N||y>N)
+		{
+			return;
 		}
+		
+		if(map[x][y] == 1)
+		{
+			return;
+		}
+		
+		if(dir == 0)
+		{
+			pipeMove(x,y+1,0);
+		}
+		else if(dir == 1)
+		{
+			pipeMove(x+1,y,1);
+		}
+		else
+		{
+			pipeMove(x,y+1,0);
+			pipeMove(x+1,y,1);
+		}
+		pipeMove(x+1,y+1,2);
 	}
 
 }
