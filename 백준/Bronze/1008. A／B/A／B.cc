@@ -16,5 +16,5 @@ int main()
 	//cout << setprecision(20);
 	//cout << answer;
 
-	printf("%.15f\n", answer);
+	printf("%.10f\n", answer);
 }
