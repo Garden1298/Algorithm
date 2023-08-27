@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include <cmath>
-//#include <algorithm>
 
 using namespace std;
 
@@ -19,17 +18,20 @@ bool check(int now) {
 
     for (int i = 0; i < s.length(); i++) 
     {
+        // 멀쩡한 버튼이라면 false 리턴
         if (button[s[i] - 48]) 
         {
             return false;
         }
     }
+
+    // 고장난 버튼이라면 true 리턴
     return true;
 }
 
 int main() {
 
-    // 이동하려고 하는 채널 N, 고장난 버튼의 개수 M
+    // 이동하려고 하는 채널 N (0 ≤ N ≤ 500,000), 고장난 버튼의 개수 M (0 ≤ M ≤ 10)
     int n, m;
     cin >> n >> m;
 
@@ -47,7 +49,7 @@ int main() {
     // +/- 버튼만으로 채널 이동하는 횟수
     int minimum = abs(n - 100);
 
-    for (int i = 0; i < 5000000; i++) 
+    for (int i = 0; i <= 1000000; i++) 
     {
         if (check(i)) 
         {
