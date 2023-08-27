@@ -31,6 +31,9 @@ bool check(int now) {
 
 int main() {
 
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     // 이동하려고 하는 채널 N (0 ≤ N ≤ 500,000), 고장난 버튼의 개수 M (0 ≤ M ≤ 10)
     int n, m;
     cin >> n >> m;
