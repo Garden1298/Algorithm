@@ -1,25 +1,19 @@
 class Solution {
 public:
-    int NextNum(int n)
-    {
-        int num = 0;
-        while(n!=0)
-        {
-            int curNum = n%10;
-            num += curNum*curNum;
-            n = n/10;
+    int Calc(int n) {
+        int ans = 0;
+        while (n) {
+            ans += (n%10) * (n%10);
+            n = n / 10;
         }
-        return num;
+        return ans;
     }
-
     bool isHappy(int n) {
-        int a = n;
-        int b = NextNum(n);
-        while(b !=1 && b != a)
-        {
-            a = NextNum(a);
-            b = NextNum(NextNum(b));
+        bool done = false;
+        int x = 7;
+        while (x--) {
+            n = Calc(n);
         }
-        return b == 1;
+        return n == 1;
     }
 };
