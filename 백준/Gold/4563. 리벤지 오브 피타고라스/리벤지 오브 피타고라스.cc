@@ -11,7 +11,7 @@ int main() {
         cin >> A;
         if (A == 0) break;
 
-        long long A2 = (long long)pow(A, 2);
+        long long A2 = (long long)pow(A, 2); // A^2
         int cnt = 0;
 
         for (long long i = 1; i <= A; i++) {

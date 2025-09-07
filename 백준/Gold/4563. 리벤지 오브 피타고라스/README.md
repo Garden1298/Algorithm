@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 2020 KB, 시간: 96 ms
+메모리: 2020 KB, 시간: 92 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2025년 9월 7일 16:41:15
+2025년 9월 7일 16:42:20
 
 ### 문제 설명
 
@@ -28,7 +28,7 @@
 
 
 
-<p><img alt="" src="" style="height:128px; width:164px"></p>
+<p><img alt="" src="https://www.acmicpc.net/upload/images/pyta1.png" style="height:128px; width:164px"></p>
 
 
 
@@ -36,7 +36,7 @@
 
 
 
-<p><img alt="" src="" style="height:128px; width:573px"></p>
+<p><img alt="" src="https://www.acmicpc.net/upload/images/pyta2.png" style="height:128px; width:573px"></p>
 
 
 
