@@ -5,6 +5,7 @@
 using namespace std;
 
 string str;
+char c;
 int main()
 {
 	while (true)
@@ -21,12 +22,13 @@ int main()
 
 		for (int i = 0; i < str.length(); i++)
 		{
+			c = str[i];
 
-			if (str[i] == '(' || str[i] == '[')
+			if (c == '(' || c == '[')
 			{
-				s.push(str[i]);
+				s.push(c);
 			}
-			else if (str[i] == ')' || str[i] == ']')
+			else if (c == ')' || c == ']')
 			{
 				if (s.empty())
 				{
@@ -38,7 +40,7 @@ int main()
 				char symbol = s.top();
 				s.pop();
 
-				if (str[i] == ')')
+				if (c == ')')
 				{
 					if (symbol != '(')
 					{
@@ -47,7 +49,7 @@ int main()
 						break;
 					}
 				}
-				else if (str[i] == ']')
+				else if (c == ']')
 				{
 					if (symbol != '[')
 					{
