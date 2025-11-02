@@ -1,56 +1,46 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-int N, cnt;
-int A[1001], dp[1001];
-vector<int> v, ans;
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-int main()
-{
-	cin >> N;
+    int N;
+    cin >> N;
 
-	for (int i = 1; i <= N; i++)
-	{
-		cin >> A[i];
-	}
+    vector<int> nums(N);
+    for (int i = 0; i < N; ++i)
+        cin >> nums[i];
 
-	v.push_back(A[1]);
+    vector<int> lis;  // LIS 후보
+    vector<int> dp(N); // 각 원소가 LIS 상 몇 번째 위치인지 저장
 
-	for (int i = 2; i <= N; i++)
-	{
-		if (v[cnt] < A[i])
-		{
-			v.push_back(A[i]);
-			cnt++;
-			dp[i] = cnt;
-		}
-		else
-		{
-			int pos = lower_bound(v.begin(), v.end(), A[i]) - v.begin();
-			v[pos] = A[i];
-			dp[i] = pos;
-		}
-	}
+    for (int i = 0; i < N; ++i) {
+        auto it = lower_bound(lis.begin(), lis.end(), nums[i]);
+        int pos = it - lis.begin();
 
-	int LIS_size = cnt;
+        if (it == lis.end()) lis.push_back(nums[i]);
+        else *it = nums[i];
 
-	for (int i = N; i >= 0; i--)
-	{
-		if (dp[i] == LIS_size)
-		{
-			ans.push_back(A[i]);
-			LIS_size--;
-		}
-	}
+        dp[i] = pos;
+    }
 
-	int size = ans.size();
-	cout << size << '\n';
-	for (int i = 0; i < size; i++)
-	{
-		cout << ans.back() << " ";
-		ans.pop_back();
-	}
+    // LIS 길이
+    int lisLength = lis.size();
 
+    // 역추적
+    vector<int> answer;
+    for (int i = N - 1; i >= 0; --i) {
+        if (dp[i] == lisLength - 1) {
+            answer.push_back(nums[i]);
+            lisLength--;
+        }
+    }
+
+    reverse(answer.begin(), answer.end());
+
+    cout << answer.size() << '\n';
+    for (int x : answer) cout << x << ' ';
 }
